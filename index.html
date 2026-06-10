@@ -6,77 +6,78 @@
   <title>Tradutor do P</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 </head>
 <body>
   <canvas id="bg-canvas"></canvas>
-  <header>
-    <div class="logo-container">
-      <div class="logo-icon">
-        <span class="pig-icon">🐖</span>
-      </div>
-      <h1>Tradutor do <span class="p-letter">P</span></h1>
-    </div>
-    <p class="subtitle">O Culto Sagrado da Língua Oculta</p>
-  </header>
 
-  <main>
-    <div class="translator-container">
-      <div class="panel input-panel">
-        <div class="panel-header">
-          <select id="source-lang">
-            <option value="portugues">Português</option>
-            <option value="espanhol">Espanhol</option>
-            <option value="ingles">Inglês</option>
-            <option value="frances">Francês</option>
-          </select>
+  <main class="container">
+    <header class="hero">
+      <div class="mascot-wrapper float-animation">
+        <div class="mascot-glow"></div>
+        <img alt="Mascote Sagrado" class="mascot-img" src="https://wasgckgvbzbyxualbeaa.supabase.co/storage/v1/object/public/yks-uploads/e5cb461e-bca9-444d-af29-1056ab2ae6eb/1781109801602_image.png"/>
+      </div>
+      <div class="hero-text">
+        <h1>Tradutor do P</h1>
+      </div>
+    </header>
+
+    <div class="translator-grid">
+      <div class="glass-panel input-panel">
+        <div class="panel-top">
+          <span class="panel-label">Entrada Profana</span>
+          <span class="char-counter" id="char-counter">0 / 5000</span>
         </div>
-        <textarea id="input-text" placeholder="Digite o texto para traduzir..." rows="8"></textarea>
-        <div class="char-count"><span id="input-count">0</span> / 5000</div>
+        <textarea id="input-text" placeholder="Sussurre suas palavras aqui..."></textarea>
       </div>
 
-      <div class="panel output-panel">
-        <div class="panel-header">
-          <select id="target-lang">
-            <option value="lingua-p">Língua do P</option>
-            <option value="portugues">Português</option>
-          </select>
-          <select id="variant" title="Variante da Língua do P">
-            <option value="pe">Pê (Brasil)</option>
-            <option value="double">Double Talk (Portugal)</option>
-            <option value="pvowel">P+Vogal</option>
-          </select>
+      <div class="swap-btn-wrapper">
+        <button class="swap-btn" id="swap-btn" title="Inverter tradução">
+          <span class="material-symbols-outlined">synagogue</span>
+        </button>
+      </div>
+
+      <div class="glass-panel output-panel">
+        <div class="panel-top">
+          <span class="panel-label">Manifestação Oculta</span>
         </div>
-        <textarea id="output-text" placeholder="A tradução aparecerá aqui..." rows="8" readonly></textarea>
+        <div class="output-display" id="output-text">A revelação aguarda o seu comando...</div>
         <div class="output-actions">
-          <button id="copy-btn" title="Copiar">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-            </svg>
-            Copiar
-          </button>
-          <button id="speak-btn" title="Ouvir">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-              <path d="M15.54 8.46a5 5 0 010 7.07"/>
-              <path d="M19.07 4.93a10 10 0 010 14.14"/>
-            </svg>
-            Ouvir
-          </button>
+          <div class="action-group">
+            <button id="copy-btn" class="action-btn">
+              <span class="material-symbols-outlined">content_copy</span>
+              <span>Capturar</span>
+            </button>
+
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="variant-info" id="variant-info">
+    <div class="variant-info glass-panel" id="variant-info">
       <p id="variant-description"><strong>Pê (Brasil):</strong> Insere "pê" antes de cada sílaba. Ex: "gato" → "pêga pêto"</p>
     </div>
 
-
+    <section class="how-it-works">
+      <div class="section-header">
+        <h2>Como funciona a Língua do P</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="glass-panel explanation">
+        <p>A Língua do P é uma criptografia fonética simples mas eficaz. Em sua versão brasileira, adicionamos a sílaba "Pê" seguida da vogal correspondente ao início de cada estrutura silábica natural da palavra.</p>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>Tradutor do P &mdash; A cifra sagrada dos iniciados</p>
+    <div class="footer-brand">
+      <img alt="Sigilo do Porquinho" class="footer-logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBBNjAzPuhh8uhvWGr2yTXa65MXeoBaJer7qW9lveyocwzYZBprLb8e-l-KxMjZyuJZ75HQl3C5BhGQSeNqtWNXJhXfqJ3pKmllxymrxG0807iPbeHHf2_jqb85jYrYOSZahL7LZ1Z5N9Doc3aB5qZdsrxVsRcffdjcXqRIcWACsVEkeZauVId54KWWHfBmLJy2IHHSJ9AasqmnonARvR7Tif_4F24jR6i3aHSdjBkKhph1wUNDElPrZ0rxDNRSSTkmm1otNu7Sn8"/>
+      <span class="footer-name">Tradutor do P</span>
+    </div>
+    <div class="footer-info">
+      <p class="footer-copy">© 2024 Tradutor do P.</p>
+      <p class="footer-tagline">O segredo está no silêncio entre os Pês</p>
+    </div>
   </footer>
 
   <script src="background.js"></script>

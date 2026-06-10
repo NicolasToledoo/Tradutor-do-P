@@ -1,11 +1,8 @@
+document.addEventListener('DOMContentLoaded', () => {
 const inputText = document.getElementById('input-text');
 const outputText = document.getElementById('output-text');
-const sourceLang = document.getElementById('source-lang');
-const targetLang = document.getElementById('target-lang');
-const variantSelect = document.getElementById('variant');
 const copyBtn = document.getElementById('copy-btn');
-const speakBtn = document.getElementById('speak-btn');
-const inputCount = document.getElementById('input-count');
+const charCounter = document.getElementById('char-counter');
 const variantDesc = document.getElementById('variant-description');
 
 const variantDescriptions = {
@@ -158,67 +155,33 @@ function decodePVowel(text) {
 
 function translate() {
   const text = inputText.value;
-  const source = sourceLang.value;
-  const target = targetLang.value;
-  const variant = variantSelect.value;
 
   if (!text.trim()) {
-    outputText.value = '';
+    outputText.textContent = 'A revelação aguarda o seu comando...';
+    outputText.classList.add('empty');
     return;
   }
 
-  let result = '';
-
-  if (target === 'lingua-p') {
-    switch (variant) {
-      case 'pe':
-        result = encodePe(text);
-        break;
-      case 'double':
-        result = encodeDoubleTalk(text);
-        break;
-      case 'pvowel':
-        result = encodePVowel(text);
-        break;
-    }
-  } else if (target === 'portugues') {
-    switch (variant) {
-      case 'pe':
-        result = decodePe(text);
-        break;
-      case 'double':
-        result = decodeDoubleTalk(text);
-        break;
-      case 'pvowel':
-        result = decodePVowel(text);
-        break;
-    }
-  }
-
-  outputText.value = result;
+  const result = encodePe(text);
+  outputText.textContent = result;
+  outputText.classList.remove('empty');
 }
 
-function updateVariantDescription() {
-  variantDesc.innerHTML = variantDescriptions[variantSelect.value];
-}
+
 
 let debounceTimer;
 inputText.addEventListener('input', () => {
-  inputCount.textContent = inputText.value.length;
+  charCounter.textContent = `${inputText.value.length} / 5000`;
   clearTimeout(debounceTimer);
   debounceTimer = setTimeout(translate, 150);
 });
 
-sourceLang.addEventListener('change', translate);
-targetLang.addEventListener('change', translate);
-variantSelect.addEventListener('change', () => {
-  updateVariantDescription();
-  translate();
-});
+
 
 copyBtn.addEventListener('click', () => {
-  if (outputText.value) {
-    navigator.clipboard.writeText(outputText.value).then(() => {
+  const textToCopy = outputText.textContent;
+  if (textToCopy && !outputText.classList.contains('empty')) {
+    navigator.clipboard.writeText(textToCopy).then(() => {
       copyBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Copiado!`;
       setTimeout(() => {
         copyBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copiar`;
@@ -226,14 +189,6 @@ copyBtn.addEventListener('click', () => {
     });
   }
 });
-
-speakBtn.addEventListener('click', () => {
-  if (outputText.value && 'speechSynthesis' in window) {
-    const utterance = new SpeechSynthesisUtterance(outputText.value);
-    utterance.lang = 'pt-BR';
-    speechSynthesis.speak(utterance);
-  }
 });
 
-updateVariantDescription();
 
