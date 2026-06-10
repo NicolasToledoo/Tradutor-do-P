@@ -26,6 +26,11 @@
       <div class="glass-panel input-panel">
         <div class="panel-top">
           <span class="panel-label">Entrada Profana</span>
+          <select id="variant-select" class="variant-select-inline">
+            <option value="pe">Pê (Brasil)</option>
+            <option value="double">Double Talk</option>
+            <option value="pvowel">P+Vogal</option>
+          </select>
           <span class="char-counter" id="char-counter">0 / 5000</span>
         </div>
         <textarea id="input-text" placeholder="Sussurre suas palavras aqui..."></textarea>
@@ -54,24 +59,39 @@
       </div>
     </div>
 
-    <div class="variant-info glass-panel" id="variant-info">
-      <p id="variant-description"><strong>Pê (Brasil):</strong> Insere "pê" antes de cada sílaba. Ex: "gato" → "pêga pêto"</p>
-    </div>
-
     <section class="how-it-works">
-      <div class="section-header">
-        <h2>Como funciona a Língua do P</h2>
-        <div class="divider"></div>
-      </div>
-      <div class="glass-panel explanation">
-        <p>A Língua do P é uma criptografia fonética simples mas eficaz. Em sua versão brasileira, adicionamos a sílaba "Pê" seguida da vogal correspondente ao início de cada estrutura silábica natural da palavra.</p>
+      <div class="bento-grid">
+        <div class="info-card-main">
+          <div class="card-icon">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">info</span>
+          </div>
+          <div class="card-content">
+            <h3 id="variant-title">Pê (Brasil)</h3>
+            <p class="info-description" id="variant-description">Insere "pê" antes de cada sílaba, usando a vogal original como base.</p>
+            <p class="info-example" id="variant-example"><span>Ex:</span> "gato" → "pegapato"</p>
+          </div>
+        </div>
+
+        <div class="info-card-secondary">
+          <div class="card-icon-small">
+            <span class="material-symbols-outlined">emoji_objects</span>
+          </div>
+          <div class="card-content-small">
+            <h4>Como funciona</h4>
+            <p class="info-description" id="variant-detail">A sílaba original é duplicada com o som "p" inserido, criando uma camada de confusão sonora.</p>
+            <div class="example-tags" id="variant-examples">
+              <span>ga → gapa</span>
+              <span>to → topo</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="footer-brand">
-      <img alt="Sigilo do Porquinho" class="footer-logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBBNjAzPuhh8uhvWGr2yTXa65MXeoBaJer7qW9lveyocwzYZBprLb8e-l-KxMjZyuJZ75HQl3C5BhGQSeNqtWNXJhXfqJ3pKmllxymrxG0807iPbeHHf2_jqb85jYrYOSZahL7LZ1Z5N9Doc3aB5qZdsrxVsRcffdjcXqRIcWACsVEkeZauVId54KWWHfBmLJy2IHHSJ9AasqmnonARvR7Tif_4F24jR6i3aHSdjBkKhph1wUNDElPrZ0rxDNRSSTkmm1otNu7Sn8"/>
+      <img alt="Sigilo do Porquinho" class="footer-logo" src="https://wasgckgvbzbyxualbeaa.supabase.co/storage/v1/object/public/yks-uploads/e5cb461e-bca9-444d-af29-1056ab2ae6eb/1781109801602_image.png"/>
       <span class="footer-name">Tradutor do P</span>
     </div>
     <div class="footer-info">

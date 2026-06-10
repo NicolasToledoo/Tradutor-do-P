@@ -3,13 +3,49 @@ const inputText = document.getElementById('input-text');
 const outputText = document.getElementById('output-text');
 const copyBtn = document.getElementById('copy-btn');
 const charCounter = document.getElementById('char-counter');
-const variantDesc = document.getElementById('variant-description');
+const variantTitle = document.getElementById('variant-title');
+const variantDescription = document.getElementById('variant-description');
+const variantExample = document.getElementById('variant-example');
+const variantDetail = document.getElementById('variant-detail');
+const variantExamples = document.getElementById('variant-examples');
+const variantSelect = document.getElementById('variant-select');
 
-const variantDescriptions = {
-  pe: '<strong>Pê (Brasil):</strong> Insere "pê" antes de cada sílaba. Ex: "gato" → "pêga pêto"',
-  double: '<strong>Double Talk (Portugal):</strong> Repete a rima de cada sílaba iniciando com "p". Ex: "gato" → "ga-pa-to-po"',
-  pvowel: '<strong>P+Vogal:</strong> Insere "P" + vogal da sílaba antes dela. Ex: "gato" → "PagaPato"'
+let currentVariant = 'pe';
+
+const variantData = {
+  pe: {
+    title: 'Pê (Brasil)',
+    description: 'Insere "p" antes de cada sílaba, usando a vogal original como base.',
+    example: '"gato" → "pegapato"',
+    detail: 'A sílaba original é duplicada com o som "p" inserido, criando uma camada de confusão sonora.',
+    examples: ['ga → gapa', 'to → topo']
+  },
+  double: {
+    title: 'Double Talk',
+    description: 'Repete cada sílaba adicionando "p" seguido da vogal original.',
+    example: '"gato" → "gapa-topo"',
+    detail: 'Cada sílaba é duplicada com o prefixo "p" mantendo a vogal original.',
+    examples: ['ga → gapa', 'to → topo']
+  },
+  pvowel: {
+    title: 'P+Vogal',
+    description: 'Adiciona "p" seguido da vogal correspondente antes de cada sílaba.',
+    example: '"gato" → "pagato"',
+    detail: 'O som "p" é inserido antes da sílaba usando apenas a vogal correspondente.',
+    examples: ['ga → paga', 'to → pato']
+  }
 };
+
+variantSelect.addEventListener('change', () => {
+  currentVariant = variantSelect.value;
+  const data = variantData[currentVariant];
+  variantTitle.textContent = data.title;
+  variantDescription.textContent = data.description;
+  variantExample.innerHTML = `<span>Ex:</span> ${data.example}`;
+  variantDetail.textContent = data.detail;
+  variantExamples.innerHTML = data.examples.map(ex => `<span>${ex}</span>`).join('');
+  translate();
+});
 
 function splitSyllables(word) {
   if (!word || word.trim() === '') return [word];
@@ -162,7 +198,17 @@ function translate() {
     return;
   }
 
-  const result = encodePe(text);
+  let result;
+  switch (currentVariant) {
+    case 'double':
+      result = encodeDoubleTalk(text);
+      break;
+    case 'pvowel':
+      result = encodePVowel(text);
+      break;
+    default:
+      result = encodePe(text);
+  }
   outputText.textContent = result;
   outputText.classList.remove('empty');
 }
